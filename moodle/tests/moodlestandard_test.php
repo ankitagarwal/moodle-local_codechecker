@@ -622,4 +622,32 @@ class moodlestandard_testcase extends local_codechecker_testcase {
         // Let's do all the hard work!
         $this->verify_cs_results();
     }
+
+
+    /**
+     * Test multiple empty lines.
+     */
+    public function test_moodle_empty_lines() {
+
+        // Define the standard, sniff and fixture to use.
+        $this->set_standard('moodle');
+        $this->set_sniff('moodle_Sniffs_Files_EmptyLineSniff');
+        $this->set_fixture(__DIR__ . '/fixtures/moodle_files_emptyline.php');
+
+        // Define expected results (errors and warnings). Format, array of:
+        //   - line => number of problems,  or
+        //   - line => array of contents for message / source problem matching.
+        //   - line => string of contents for message / source problem matching (only 1).
+        $this->set_errors(array(3 => 'Consecutive multiple empty lines are not allowed',
+                                4 => 0,
+                                5 => 0,
+                                6 => 0,
+                                7 => 0,
+                                8 => 0,
+                                9 => 0));
+        $this->set_warnings(array());
+
+        // Let's do all the hard work!
+        $this->verify_cs_results();
+    }
 }
