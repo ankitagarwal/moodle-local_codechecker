@@ -602,6 +602,24 @@ class moodlestandard_testcase extends local_codechecker_testcase {
         $this->set_errors(array());
         $this->set_warnings(array());
 
+    /*
+     * Test new line at file ending standards
+     */
+    public function test_moodle_new_line_file_end() {
+
+        // Define the standard, sniff and fixture to use.
+        $this->set_standard('moodle');
+        $this->set_sniff('Generic_Sniffs_Files_EndFileNewlineSniff');
+        $this->set_fixture(__DIR__ . '/fixtures/generic_files_endfilenewlinesniff.php');
+
+        // Define expected results (errors and warnings). Format, array of:
+        //   - line => number of problems,  or
+        //   - line => array of contents for message / source problem matching.
+        //   - line => string of contents for message / source problem matching (only 1).
+        $this->set_errors(array(3 => 'File must end with a newline character'));
+        $this->set_warnings(array());
+
+        // Let's do all the hard work!
         $this->verify_cs_results();
     }
 }
